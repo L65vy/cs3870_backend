@@ -23,8 +23,8 @@ const DBNAME = process.env.DBNAME;
 const COLLECTION = process.env.COLLECTION;
 
 
-const client = new MongoClient(url);
-const db = client.db(dbName);
+const client = new MongoClient(MONGO_URI);
+const db = client.db(DBNAME);
 
 // Start server
 app.listen(PORT, HOST, () => {
