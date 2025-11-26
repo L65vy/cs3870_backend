@@ -10,7 +10,16 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "https://L65vy.github.io",
+      "https://l65vy.github.io",
+      "http://localhost:5173"
+    ],
+    methods: ["GET", "POST", "DELETE"],
+  })
+);
 app.use(express.json()); // replaces body-parser
 
 // Server configuration
