@@ -6,15 +6,9 @@ import { MongoClient } from "mongodb";
 // Load environment variables FIRST
 dotenv.config();
 
-// MongoDB
-const url = MONGO_URI
-const dbName = DBNAME;
-const collection = COLLECTION;
-const client = new MongoClient(url);
-const db = client.db(dbName);
-
 // Create Express app
 const app = express();
+
 // Middleware
 app.use(cors());
 app.use(express.json()); // replaces body-parser
@@ -27,6 +21,9 @@ const HOST = process.env.HOST ?? "0.0.0.0";
 const MONGO_URI = process.env.MONGO_URI;
 const DBNAME = process.env.DBNAME;
 const COLLECTION = process.env.COLLECTION;
+
+const client = new MongoClient(MONGO_URI);
+const db = client.db(DBNAME);
 
 // Start server
 app.listen(PORT, HOST, () => {
