@@ -6,25 +6,27 @@ import { MongoClient } from "mongodb";
 // Load environment variables FIRST
 dotenv.config();
 
+// MongoDB
+const url = MONGO_URI
+const dbName = DBNAME;
+const collection = COLLECTION;
+const client = new MongoClient(url);
+const db = client.db(dbName);
+
 // Create Express app
 const app = express();
-
 // Middleware
 app.use(cors());
 app.use(express.json()); // replaces body-parser
 
-
 // Server configuration
 const PORT = process.env.PORT ?? 3000;
 const HOST = process.env.HOST ?? "0.0.0.0";
+
 // MongoDB configuration
 const MONGO_URI = process.env.MONGO_URI;
 const DBNAME = process.env.DBNAME;
 const COLLECTION = process.env.COLLECTION;
-
-
-const client = new MongoClient(MONGO_URI);
-const db = client.db(DBNAME);
 
 // Start server
 app.listen(PORT, HOST, () => {
@@ -48,7 +50,6 @@ app.get("/contacts", async (req, res) => {
   // res.send(results);
   res.json(results);
 });
-
 //"contacts/<name>" route (Can specify a key to look for, 'name' in this case, and search for only values associated with the key)
 app.get("/contacts/:name", async (req, res) => {
   const contactName = decodeURIComponent(req.params.name); // Decode the name parameter
@@ -67,11 +68,6 @@ app.get("/contacts/:name", async (req, res) => {
     res.status(200).json(result);
   }
 });
-
-//Debug output
-app.get("/name", (req, res) => {
-  res.send("My name is Levi");
-})
 
 /// --- Post Endpoints ---
 
