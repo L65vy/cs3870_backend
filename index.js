@@ -49,7 +49,7 @@ app.get("/contacts", async (req, res) => {
 });
 
 app.get("/name", (req, res) => {
-  es.send("My name is Levi");
+  res.send("My name is Levi");
 } );
 
 //"contacts/<name>" route (Can specify a key to look for, 'name' in this case, and search for only values associated with the key)
