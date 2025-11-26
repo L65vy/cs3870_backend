@@ -47,6 +47,11 @@ app.get("/contacts", async (req, res) => {
   // res.send(results);
   res.json(results);
 });
+
+app.get("/name", (req, res) => {
+  es.send("My name is Levi");
+} );
+
 //"contacts/<name>" route (Can specify a key to look for, 'name' in this case, and search for only values associated with the key)
 app.get("/contacts/:name", async (req, res) => {
   const contactName = decodeURIComponent(req.params.name); // Decode the name parameter
