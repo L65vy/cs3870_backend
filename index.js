@@ -33,11 +33,6 @@ app.get("/hello", (req, res) => {
 const SECRET_KEY = "SUPER_SECRET_KEY_CHANGE_ME"; // use env var in real apps
 const ACCESS_TOKEN_EXPIRE_MINUTES = 30; // set 1 for demos if you want
 
-// ======== START SERVER ========
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
-
 // ======== SIMPLE USER "DB" (in-memory for demo) ========
 // key: email, value: hashed password
 const fakeUsersDb = {};
