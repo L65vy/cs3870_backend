@@ -163,6 +163,33 @@ app.get("/contacts", async (req, res) => {
   }
 });
 
+// ======== 6a) GET ONE BY NAME ========
+app.get("/contacts/:contact_name", async (req, res) => {
+  try {
+    const contactName = req.params.contact_name;
+    if (!contactName) {
+      return res.status(400).json({ message: "Contact name is required" });
+    }
+
+    await client.connect();
+    console.log("Node connected successfully to GET one MongoDB");
+    const contact = await db
+      .collection(COLLECTION)
+      .findOne({ contact_name: contactName });
+
+    if (!contact) {
+      return res.status(404).json({ message: "Contact not found" });
+    }
+
+    res.status(200);
+    res.json(contact);
+  } catch (error) {
+    console.error("Error in GET /contacts/:contact_name:", error);
+    res.status(500);
+    res.json({ message: "Failed to retrieve contact: " + error.message });
+  }
+});
+
 // ======== 6) POST Add new contact ========
 // Now this route is protected by JWT
 app.post("/contacts", authenticateToken, async (req, res) => {
